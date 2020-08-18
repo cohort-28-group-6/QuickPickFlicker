@@ -2,7 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Gallery = (props) => {
-  const { movies } = props
+  const { 
+    movies, 
+    saveMovie, 
+  } = props
 
   return (
     <div className="catalogue">
@@ -14,6 +17,7 @@ const Gallery = (props) => {
                 <img src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                   alt={`Movie poster for ${movie.original_title}`} />
               </Link>
+              <button onClick={() => saveMovie(movie.id)}>SAVE</button> 
             </div>
           );
         })

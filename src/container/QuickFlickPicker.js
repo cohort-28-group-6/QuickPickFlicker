@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
-import { discoverMovies, searchMovies } from '../helpers/api'
+import { 
+  discoverMovies, 
+  searchMovies,
+  searchMovieDetails,
+} from '../helpers/api'
 import { 
   Gallery, 
   SearchBar 
@@ -36,6 +40,15 @@ class QuickFlickPicker extends Component {
 
   }
 
+  saveMovie = (movieID) => {
+    searchMovieDetails(movieID)
+      .then(data => {
+        // here just grab the info from the json and put 
+        // ur firebase logic here to PUT/POST
+        console.log(data)
+      })
+  }
+
   render() {
     const { movies, searched } = this.state
 
@@ -46,7 +59,7 @@ class QuickFlickPicker extends Component {
           handleSearch={this.handleSearch} 
           handleSubmit={this.handleSubmit}
         />
-        {this.state.searched && <Gallery movies={movies} />}
+        { searched && <Gallery movies={movies} saveMovie={this.saveMovie} /> }
       </div>
     )
   }
